@@ -36,6 +36,8 @@ function ImageRenderer({tnode}: ImageRendererProps) {
     const htmlAttribs = tnode.attributes;
     const isDeleted = isDeletedNode(tnode);
 
+    delete htmlAttribs[CONST.ATTACHMENT_SOURCE_ATTRIBUTE];
+
     // There are two kinds of images that need to be displayed:
     //
     //     - Chat Attachment images
