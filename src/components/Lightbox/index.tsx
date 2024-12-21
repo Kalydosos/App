@@ -205,6 +205,19 @@ function Lightbox({isAuthTokenRequired = false, uri, onScaleChanged: onScaleChan
 
     const isLocalFile = FileUtils.isLocalFile(uri);
 
+    const waitForSession = useCallback(() => {
+        'worklet';
+
+         // only active lightbox should call this function
+         if (!isActive || isFallbackVisible || !isLightboxVisible) {
+            console.debug(`@51888 lightbox returns, waitForSession ${uri} isActive ${isActive} isFallbackVisible ${isFallbackVisible} isLightboxVisible ${isLightboxVisible} isLightboxImageLoaded ${isLightboxImageLoaded}`);
+            return;
+        }
+        console.debug(`@51888 HERE lightbox waitForSession ${uri}`);
+        setContentSize(cachedImageDimensions.get(uri));
+        setLightboxImageLoaded(false);
+    }, []);
+
     return (
         <View
             style={[StyleSheet.absoluteFill, style]}
@@ -236,16 +249,7 @@ function Lightbox({isAuthTokenRequired = false, uri, onScaleChanged: onScaleChan
                                         updateContentSize(e);
                                         setLightboxImageLoaded(true);
                                     }}
-                                    waitForSession={() => {
-                                        // only active lightbox should call this function
-                                        if (!isActive || isFallbackVisible || !isLightboxVisible) {
-                                            console.debug(`@51888 lightbox returns, waitForSession ${uri} isActive ${isActive} isFallbackVisible ${isFallbackVisible} isLightboxVisible ${isLightboxVisible} isLightboxImageLoaded ${isLightboxImageLoaded}`);
-                                            return;
-                                        }
-                                        console.debug(`@51888 HERE lightbox waitForSession ${uri}`);
-                                        setContentSize(cachedImageDimensions.get(uri));
-                                        setLightboxImageLoaded(false);
-                                    }}
+                                    waitForSession={waitForSession}
                                 />
                             </MultiGestureCanvas>
                         </View>
