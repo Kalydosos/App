@@ -68,7 +68,7 @@ function ImageCropView({imageUri = '', containerSize = 0, panGesture = Gesture.P
             transform: [{translateX: translateX.get()}, {translateY: translateY.get()}, {scale: scale.get() * aspectRatio}, {rotate: `${rotate}deg`}],
         };
     }, [originalImageHeight, originalImageWidth, rotation, translateX, translateY, scale]);
-console.debug(`@51888 ImageCropView Animated.Image`);
+
     // We're preventing text selection with ControlSelection.blockElement to prevent safari
     // default behaviour of cursor - I-beam cursor on drag. See https://github.com/Expensify/App/issues/13688
     return (
