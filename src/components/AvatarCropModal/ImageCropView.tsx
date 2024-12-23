@@ -44,7 +44,6 @@ type ImageCropViewProps = {
 };
 
 function ImageCropView({imageUri = '', containerSize = 0, panGesture = Gesture.Pan(), maskImage = Expensicons.ImageCropCircleMask, ...props}: ImageCropViewProps) {
-    console.debug(`@51888 ImageCropView `);
     const styles = useThemeStyles();
     const StyleUtils = useStyleUtils();
     const containerStyle = StyleUtils.getWidthAndHeightStyle(containerSize, containerSize);
