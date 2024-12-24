@@ -775,8 +775,11 @@ function invalidateCredentials() {
 }
 
 function invalidateAuthToken() {
-    NetworkStore.setAuthToken('pizza');
-    Onyx.merge(ONYXKEYS.SESSION, {authToken: 'pizza', encryptedAuthToken: 'pizza', creationDate: new Date().getTime() - CONST.SESSION_EXPIRATION_TIME_MS});
+     // expires the session after 10s
+     setTimeout(() => {
+        NetworkStore.setAuthToken('pizza');
+        Onyx.merge(ONYXKEYS.SESSION, {authToken: 'pizza', encryptedAuthToken: 'pizza', creationDate: new Date().getTime() - CONST.SESSION_EXPIRATION_TIME_MS});
+    }, 10000);
 }
 
 /**
